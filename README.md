@@ -29,14 +29,53 @@ cd into directory of script
 
 make script executable:
 ```sh
-chmod +x wifiAutoAuth
+chmod +x wifiAutoAuth.sh
 ```
+
+
+#### Using crontab
 
 ```sh
 crontab -e
 @reboot  /home/user/startup.sh
 ```
 Now your your startup.sh script will run at every start.
+
+#### Using systemctl:
+
+- cd to `/etc/systemd/system`
+
+- Create a file named `wifiLogin.service`
+- Add the following lines to `wifiLogin.service`:
+```sh
+[Unit]
+Description=WifiAutoLogin
+
+[Service]
+Type=simple
+ExecStart=/path/to/wifiAutoAuth.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+Replace `/path/to/wifiAutoAuth.sh` with your location of the login script and save the changes
+
+- Reload the systemctl daemon using 
+```sh
+sudo systemctl daemon-reload
+```
+
+- Enable the service:
+```sh
+sudo systemctl enable wifiLogin.service
+sudo systemctl start wifiLogin.service
+```
+- Check the status of the service:
+```sh
+sudo systemctl status wifiLogin.service
+```
+Now your system will login to wifi on every system login
+
 
 ### Windows
 curl command-line tool is required for running this batch script
