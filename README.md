@@ -33,7 +33,7 @@ chmod +x wifiAutoAuth.sh
 ```
 
 
-##### Using crontab
+#### Using crontab
 
 ```sh
 crontab -e
@@ -41,7 +41,7 @@ crontab -e
 ```
 Now your your startup.sh script will run at every start.
 
-##### Using systemctl:
+#### Using systemctl:
 
 - cd to `/etc/systemd/system`
 
